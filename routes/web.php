@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GbizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view("/gbiz", "gbiz");
+//転送先ルート
+Route::get('/gbiz', [GbizController::class, 'index']) -> name('gbiz');
+
+//リダイレクト設定
+Route::get('/old-url', function(){
+  return redirect( route('gbiz'), 301 );
+});
