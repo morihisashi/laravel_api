@@ -7,12 +7,12 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-class GbizController extends BaseController
+class GbizController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){
-        return 1;
+        return view('gbiz.index');
     }
 
 }
