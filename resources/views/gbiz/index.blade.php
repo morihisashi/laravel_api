@@ -12,8 +12,6 @@
             // ランダムな整数を生成
             let randomNumber = getRandomInt(1, 100);
             console.log(randomNumber);
-            // 結果を表示
-            // document.getElementById('gbiz').textContent = randomNumber;
         }
 
         function getRandomInt(minval, maxval){
