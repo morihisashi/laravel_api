@@ -18,10 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//転送先ルート
-Route::get('/gbiz', [GbizController::class, 'index']) -> name('gbiz');
-
-//リダイレクト設定
-Route::get('/old-url', function(){
-  return redirect( route('gbiz'), 301 );
-});
+Route::get('/gbiz', [GbizController::class, 'index'])->name('gbiz.index');
+Route::post('/gbiz', [GbizController::class, 'redirect'])->name('gbiz.redirect');
