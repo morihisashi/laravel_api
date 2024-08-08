@@ -17,13 +17,14 @@ class GbizController extends Controller
 
     public function index(Request $request): RedirectResponse|View
     {
-        // 例えば、特定の条件に基づいてリダイレクトを行う
-        if ($request->input('redirect') === 'true') {
-            return redirect('redirect')->with('status', 'Redirected successfully!');
-        }
+        // リクエストデータの処理
+        $data = $request->all();
 
-        // その他の処理
-        return view('gbiz.index');
+        // modelを呼び出す
+        $gbiz = new Gbiz();
+        $res = $gbiz->getApi($data);
+
+        return view('gbiz.index')->with('res', $res);
     }
 
     public function redirect(Request $request): RedirectResponse
