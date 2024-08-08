@@ -27,5 +27,6 @@
             <label>法人名：<input type="text" name="name"></label>
             <button type='submit' id='gbiz' onclick="gbiz()">法人情報検索</button>
         </form>
+        <?php var_dump($res);?>
     </body>
 </html>

@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Gbiz;
 
 class GbizController extends Controller
 {
@@ -30,10 +31,12 @@ class GbizController extends Controller
         // リクエストデータの処理
         $data = $request->all();
 
-        // データを処理するロジックを追加
+        // modelを呼び出す
+        $gbiz = new Gbiz();
+        $res = $gbiz->getApi($data);
 
         // リダイレクト
-        return redirect()->route('gbiz.index')->with('status', 'Data processed successfully!');
+        return redirect()->route('gbiz.index')->with('res', $res);
     }
 
 }
