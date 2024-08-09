@@ -17,6 +17,9 @@ class GbizController extends Controller
 
     public function index(Request $request): RedirectResponse|View
     {
+        if(isset($request['corporate_number'])){
+            return 1;
+        }
         // リクエストデータの処理
         $data = $request->all();
 
