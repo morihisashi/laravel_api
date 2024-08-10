@@ -12,7 +12,7 @@ class Gbiz extends Model
 {
     use HasFactory;
 
-    public function getApi($data){
+    public function getApi($coroporate, $name){
         try {
             $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
             $dotenv->load();
@@ -20,8 +20,15 @@ class Gbiz extends Model
             echo 'Error loading .env file: ',  $e->getMessage();
             exit;
         }
+        if(isset($coroporate)){
+            $url = env('API_URL') . '?corporate_number=' . $coroporate . '&page=' . env('PAGE') . '&limit=' . env('LIMIT');
+        }
+
+        if(isset($name)){
+            $encodedString = urlencode($name);
+            $url = env('API_URL') . '?name=' . $encodedString . '&page=' . env('PAGE') . '&limit=' . env('LIMIT');
+        }
         
-        $url = env('API_URL') . '?corporate_number=' . env('CORPORATE_NUMBER') . '&page=' . env('PAGE') . '&limit=' . env('LIMIT');
         $headers = [
             "Content-Type: application/json",
             "X-hojinInfo-api-token: " . env('API_TOKEN'),

@@ -20,12 +20,6 @@ class GbizController extends Controller
     public function index(Request $request): RedirectResponse|View
     {
         $corporate = '';
-        // リクエストデータの処理
-        $data = $request->all();
-
-        // modelを呼び出す
-        $gbiz = new Gbiz();
-        $res = $gbiz->getApi($data);
 
         return view('gbiz.index')->with('corporate', $corporate);
     }
@@ -34,15 +28,14 @@ class GbizController extends Controller
     {
         // リクエストデータの処理
         $corporate = '';
-        if(!empty($request->input('corporate_number'))){
+        if(!empty($request->input('corporate_number')) or !empty($request->input('name'))){
             $corporate = $request->input('corporate_number');
             $name = $request->input('name');
-            return view('gbiz.index')->with('corporate', $corporate);
+            // modelを呼び出す
+            $gbiz = new Gbiz();
+            $res = $gbiz->getApi($corporate,$name);
+            return view('gbiz.index')->with('res', $res);
         }
-
-        // modelを呼び出す
-        $gbiz = new Gbiz();
-        $res = $gbiz->getApi($data);
 
         // リダイレクト
         return view('gbiz.index')->with('corporate', $corporate);

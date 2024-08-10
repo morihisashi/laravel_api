@@ -23,17 +23,11 @@
     <body>
         <form action="{{route('gbiz.redirect')}}" method="POST">
         @csrf
+            <p>どちらかのみ記載をお願いします。</p>
             <label>法人番号：<input type="text" name="corporate_number"></label>
             <label>法人名：<input type="text" name="name"></label>
             <button type='submit' id='gbiz'>法人情報検索</button>
         </form>
-        @if(empty($corporate))
-        <?php var_dump($corporate);?>
-        @endif
-        <!-- @if(!isset($request))
-        <p>こんちは</p>
-        @else
-        <?php // var_dump($request);?>
-        @endif -->
+        <?php var_dump($res);?>
     </body>
 </html>
