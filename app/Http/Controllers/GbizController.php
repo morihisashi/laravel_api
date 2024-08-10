@@ -11,15 +11,15 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Gbiz;
 
+use function PHPUnit\Framework\isNull;
+
 class GbizController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(Request $request): RedirectResponse|View
     {
-        if(isset($request['corporate_number'])){
-            return 1;
-        }
+        $corporate = '';
         // リクエストデータの処理
         $data = $request->all();
 
@@ -27,20 +27,25 @@ class GbizController extends Controller
         $gbiz = new Gbiz();
         $res = $gbiz->getApi($data);
 
-        return view('gbiz.index')->with('res', $res);
+        return view('gbiz.index')->with('corporate', $corporate);
     }
 
-    public function redirect(Request $request): RedirectResponse
+    public function redirect(Request $request): View
     {
         // リクエストデータの処理
-        $data = $request->all();
+        $corporate = '';
+        if(!empty($request->input('corporate_number'))){
+            $corporate = $request->input('corporate_number');
+            $name = $request->input('name');
+            return view('gbiz.index')->with('corporate', $corporate);
+        }
 
         // modelを呼び出す
         $gbiz = new Gbiz();
         $res = $gbiz->getApi($data);
 
         // リダイレクト
-        return redirect()->route('gbiz.index')->with('res', $res);
+        return view('gbiz.index')->with('corporate', $corporate);
     }
 
 }
