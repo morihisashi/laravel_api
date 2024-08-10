@@ -25,7 +25,7 @@
         @csrf
             <label>法人番号：<input type="text" name="corporate_number"></label>
             <label>法人名：<input type="text" name="name"></label>
-            <button type='submit' id='gbiz' onclick="gbiz()">法人情報検索</button>
+            <button type='submit' id='gbiz' onclick="{{route('gbiz.redirect')}}">法人情報検索</button>
         </form>
         @if(!isset($res))
         <p>こんちは</p>
