@@ -6,25 +6,11 @@
         <title>gbiz</title>
     </head>
     <script>
-        console.log('こんにちは');
-        // ボタンのクリックイベントを設定
-        function gbiz() {
-            // ランダムな整数を生成
-            let randomNumber = getRandomInt(1, 100);
-            console.log(randomNumber);
-        }
-
-        function getRandomInt(minval, maxval){
-            let min = Math.ceil(minval);
-            let max = Math.floor(maxval);
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
     </script>
     <body>
         <form action="{{route('gbiz.redirect')}}" method="POST">
         @csrf
-            <p>どちらかのみ記載をお願いします。</p>
-            <label>法人番号：<input type="text" name="corporate_number"></label>
+            <p>調べたい法人名を記載してください</p>
             <label>法人名：<input type="text" name="name"></label>
             <button type='submit' id='gbiz'>法人情報検索</button>
         </form>

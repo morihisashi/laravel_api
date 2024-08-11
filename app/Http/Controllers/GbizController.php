@@ -17,11 +17,11 @@ class GbizController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index(Request $request): RedirectResponse|View
+    public function index(): View
     {
-        $corporate = '';
+        $res = '';
 
-        return view('gbiz.index')->with('corporate', $corporate);
+        return view('gbiz.index')->with('res', $res);
     }
 
     public function redirect(Request $request): View
