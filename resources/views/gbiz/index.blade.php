@@ -14,6 +14,18 @@
             <label>法人名：<input type="text" name="name"></label>
             <button type='submit' id='gbiz'>法人情報検索</button>
         </form>
-        <?php var_dump($res);?>
+        <?php //var_dump($res); ?>
+        <!-- 不要な部分を削除し、JSON部分のみを抽出 -->
+        <?php $jsonString = substr($res, strpos($res, '{')); ?>
+
+        <!-- JSON文字列をPHPの配列に変換 -->
+        <?php 
+        $data = json_decode($jsonString, true);
+        foreach($data['hojin-infos'] as $value){
+            foreach($value as $key => $val){
+                echo $key . ':' . $val . '\n';
+            }
+        }
+        ?>
     </body>
 </html>
