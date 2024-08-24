@@ -19,9 +19,9 @@ class GbizController extends Controller
 
     public function index(): View
     {
-        $res = '';
+        $data = '';
 
-        return view('gbiz.index')->with('res', $res);
+        return view('gbiz.index')->with('data', $data);
     }
 
     public function redirect(Request $request): View
@@ -34,7 +34,11 @@ class GbizController extends Controller
             // modelを呼び出す
             $gbiz = new Gbiz();
             $res = $gbiz->getApi($corporate,$name);
-            return view('gbiz.index')->with('res', $res);
+            // 不要な部分を削除し、JSON部分のみを抽出
+            $jsonString = substr($res, strpos($res, '{'));
+            // JSON文字列をPHPの配列に変換
+            $data = json_decode($jsonString, true);
+            return view('gbiz.index')->with('data', $data);
         }
 
         // リダイレクト
