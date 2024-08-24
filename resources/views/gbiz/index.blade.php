@@ -14,14 +14,14 @@
             <label>法人名：<input type="text" name="name"></label>
             <button type='submit' id='gbiz'>法人情報検索</button>
         </form>
-        <?php if($data !== ''){
-            foreach($data['hojin-infos'] as $value){
-                foreach($value as $key => $val){
-                    echo $key . ':' . $val . '<br>';
-                }
-            }
-        }?>
-
-        
+        @if($data !== '' && isset($data["hojin-infos"]))
+            @foreach($data["hojin-infos"] as $value)
+                @foreach($value as $key => $val)
+                    <p>{{$key}} : {{$val}}<br></p>
+                @endforeach
+            @endforeach
+        @else
+            <p>検索結果がありません。</p>
+        @endif
     </body>
 </html>
