@@ -21,7 +21,7 @@
             $data = json_decode($jsonString, true);
             foreach($data['hojin-infos'] as $value){
                 foreach($value as $key => $val){
-                    echo $key . ':' . $val . '\n';
+                    echo $key . ':' . $val . '<br>';
                 }
             }
         }?>
