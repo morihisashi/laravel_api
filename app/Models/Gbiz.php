@@ -7,21 +7,21 @@ use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Gbiz extends Model
 {
     use HasFactory;
 
-    public function getApi($coroporate, $name){
+    // 検索した企業名でAPIを叩き、情報を取得する
+    public function getApi($name){
         try {
             $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
             $dotenv->load();
         } catch (InvalidPathException $e) {
             echo 'Error loading .env file: ',  $e->getMessage();
             exit;
-        }
-        if(isset($coroporate)){
-            $url = env('API_URL') . '?corporate_number=' . $coroporate . '&page=' . env('PAGE') . '&limit=' . env('LIMIT');
         }
 
         if(isset($name)){
@@ -46,5 +46,26 @@ class Gbiz extends Model
         curl_close($ch);
 
         return $res;
+    }
+
+    // 取得した結果をデータベースに保存する
+    public function insertApiData($name, $jsonString){
+        if($name != ''){
+            try {
+                DB::table('gbiz_search')->insert([
+                    'companyname' => $name,
+                    'res' => true,
+                    'result' => $jsonString,
+                    'datecrt' => NOW(),
+                ]);
+                Log::info('gbiz_searchにinsertを開始しました。');
+                return true;
+            } catch (InvalidPathException $e) {
+                echo 'Error insert gbiz_search : ',  $e->getMessage();
+                exit;
+            }
+        }else{
+            return false;
+        }
     }
 }

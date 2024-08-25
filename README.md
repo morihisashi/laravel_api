@@ -26,7 +26,7 @@ LaravelでAPI連携をしていく。
 
 - SQL
 ***
-CREATE TABLE gbiz_serach (
+CREATE TABLE gbiz_search (
     id INT AUTO_INCREMENT PRIMARY KEY,
     companyname VARCHAR(100) CHARACTER SET utf8mb4,
     res BOOLEAN,
