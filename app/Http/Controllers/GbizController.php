@@ -51,6 +51,7 @@ class GbizController extends Controller
         return view('gbiz.index')->with('data', $data);
     }
 
+    // 検索結果の一覧表示
     public function list(Request $request): View
     {
         // modelを呼び出す
@@ -63,6 +64,15 @@ class GbizController extends Controller
 
         // リダイレクト
         return view('gbiz.list')->with('list', $list);
+    }
+
+    // 検索結果の詳細表示
+    public function detail(Request $request): View
+    {
+        $detail = '';
+
+        // リダイレクト
+        return view('gbiz.detail')->with('detail', $detail);
     }
 
 }

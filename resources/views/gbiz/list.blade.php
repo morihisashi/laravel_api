@@ -9,6 +9,23 @@
     </script>
     <body>
         <p>りすと</p>
-        <?php var_dump($list);?>
+        <table>
+            <tr>
+                <th>No</th>
+                <th>検索した会社名</th>
+                <th>検索結果</th>
+                <th>詳細</th>
+                <th>検索日時</th>
+            </tr>
+            @foreach($list as $value)
+                @foreach($value as $key => $val)
+                    @if($key === 'result')
+                        <td><a href="{{route('gbiz.detail')}}">詳細</a></td>
+                    @else
+                        <td>{{$val}}</td>
+                    @endif
+                @endforeach
+            @endforeach
+        </table>
     </body>
 </html>
