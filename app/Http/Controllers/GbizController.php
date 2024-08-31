@@ -51,4 +51,13 @@ class GbizController extends Controller
         return view('gbiz.index')->with('data', $data);
     }
 
+    public function list(Request $request): View
+    {
+        // リクエストデータの処理
+        $list = '';
+
+        // リダイレクト
+        return view('gbiz.list')->with('list', $list);
+    }
+
 }

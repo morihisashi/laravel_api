@@ -14,6 +14,10 @@
             <label>法人名：<input type="text" name="name"></label>
             <button type='submit' id='gbiz'>法人情報検索</button>
         </form>
+        <form action="{{route('gbiz.list')}}" method="POST">
+            @csrf
+            <button type='submit' id='gbizlist'>検索結果一覧</button>
+        </form>
         @if($data !== '' && isset($data["hojin-infos"]))
             @foreach($data["hojin-infos"] as $value)
                 @foreach($value as $key => $val)

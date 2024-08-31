@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/gbiz', [GbizController::class, 'index'])->name('gbiz.index');
 Route::post('/gbiz', [GbizController::class, 'redirect'])->name('gbiz.redirect');
+Route::post('/gbiz/list', [GbizController::class, 'list'])->name('gbiz.list');
