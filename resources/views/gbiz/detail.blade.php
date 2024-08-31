@@ -9,5 +9,9 @@
     </script>
     <body>
         <p>詳細</p>
+        <form action="{{route('gbiz.list')}}" method="POST">
+        @csrf
+            <button type="submit">検索結果へ</button>
+        </form>
     </body>
 </html>
