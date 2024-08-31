@@ -68,4 +68,16 @@ class Gbiz extends Model
             return false;
         }
     }
+
+    // データベース保存した結果を取得する
+    public function getData(){
+        try {
+            $list = DB::table('gbiz_search')->get();
+            Log::info('gbiz_searchから情報を取得しました。');
+            return $list;
+        } catch (InvalidPathException $e) {
+            echo 'Error select gbiz_search : ',  $e->getMessage();
+            exit;
+        }
+    }
 }

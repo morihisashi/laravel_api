@@ -53,8 +53,13 @@ class GbizController extends Controller
 
     public function list(Request $request): View
     {
-        // リクエストデータの処理
-        $list = '';
+        // modelを呼び出す
+        $gbiz = new Gbiz();
+        $list = $gbiz->getData();
+
+        if(count($list) === 0){
+            $list = '';
+        }
 
         // リダイレクト
         return view('gbiz.list')->with('list', $list);

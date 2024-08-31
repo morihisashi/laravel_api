@@ -9,5 +9,6 @@
     </script>
     <body>
         <p>りすと</p>
+        <?php var_dump($list);?>
     </body>
 </html>
