@@ -47,7 +47,7 @@ class GbizController extends Controller
             return view('gbiz.index')->with('data', $data);
         }
 
-        // リダイレクト
+        // アサイン
         return view('gbiz.index')->with('data', $data);
     }
 
@@ -62,7 +62,7 @@ class GbizController extends Controller
             $list = '';
         }
 
-        // リダイレクト
+        // アサイン
         return view('gbiz.list')->with('list', $list);
     }
 
@@ -70,8 +70,8 @@ class GbizController extends Controller
     public function detail(Request $request): View
     {
         $detail = '';
-
-        // リダイレクト
+        $detail = $request->input('result');
+        // アサイン
         return view('gbiz.detail')->with('detail', $detail);
     }
 

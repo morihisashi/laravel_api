@@ -11,6 +11,7 @@
         <p>詳細</p>
         <form action="{{route('gbiz.list')}}" method="POST">
         @csrf
+            <?php var_dump($detail);?>
             <button type="submit">検索結果へ</button>
         </form>
     </body>

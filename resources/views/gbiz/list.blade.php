@@ -9,23 +9,31 @@
     </script>
     <body>
         <p>りすと</p>
-        <table>
-            <tr>
-                <th>No</th>
-                <th>検索した会社名</th>
-                <th>検索結果</th>
-                <th>詳細</th>
-                <th>検索日時</th>
-            </tr>
-            @foreach($list as $value)
-                @foreach($value as $key => $val)
-                    @if($key === 'result')
-                        <td><a href="{{route('gbiz.detail')}}">詳細</a></td>
-                    @else
-                        <td>{{$val}}</td>
-                    @endif
+        <form action="{{route('gbiz.detail')}}" method="POST">
+            @csrf
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>検索した会社名</th>
+                    <th>検索結果</th>
+                    <th>詳細</th>
+                    <th>検索日時</th>
+                </tr>
+                @foreach($list as $value)
+                    <tr>
+                    @foreach($value as $key => $val)
+                        @if($key === 'result')
+                            <td>
+                                <input type="hidden" name="result" value="{{$val}}">
+                                <button type="submit">詳細</button>
+                            </td>
+                        @else
+                            <td>{{$val}}</td>
+                        @endif
+                    @endforeach
+                    </tr>
                 @endforeach
-            @endforeach
-        </table>
+            </table>
+        </form>
     </body>
 </html>
