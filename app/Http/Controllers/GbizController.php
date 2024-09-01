@@ -71,8 +71,10 @@ class GbizController extends Controller
     {
         $detail = '';
         $detail = $request->input('result');
+        // JSON文字列をPHPの配列に変換
+        $detail = json_decode($detail, true);
         // アサイン
-        return view('gbiz.detail')->with('detail', $detail);
+        return view('gbiz.detail')->with('detail', $detail["hojin-infos"]);
     }
 
 }
