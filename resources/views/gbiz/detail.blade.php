@@ -11,7 +11,6 @@
         <p>詳細</p>
         <form action="{{route('gbiz.list')}}" method="POST">
         @csrf
-            <?php var_dump($detail);?>
             <table>
                 <tr>
                     <th>会社名</th>
