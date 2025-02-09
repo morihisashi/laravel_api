@@ -6,7 +6,6 @@
         <title>gbiz</title>
     </head>
     <script>
-        console.log('こんにちは');
         // ボタンのクリックイベントを設定
         function gbiz() {
             // ランダムな整数を生成

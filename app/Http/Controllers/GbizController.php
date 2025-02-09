@@ -36,7 +36,7 @@ class GbizController extends Controller
             $res = $gbiz->getApi($name);
             // 不要な部分を削除し、JSON部分のみを抽出
             $jsonString = substr($res, strpos($res, '{'));
-
+            Log::info($jsonString);
             // gbiz_searchへ取得結果を保存する
             $result = $gbiz->insertApiData($name, $jsonString);
             if($result){
