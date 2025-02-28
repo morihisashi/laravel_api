@@ -23,4 +23,5 @@ Route::get('/gbiz', [GbizController::class, 'index'])->name('gbiz.index');
 Route::post('/gbiz', [GbizController::class, 'redirect'])->name('gbiz.redirect');
 Route::post('/gbiz/list', [GbizController::class, 'list'])->name('gbiz.list');
 Route::post('/gbiz/detail', [GbizController::class, 'detail'])->name('gbiz.detail');
-Route::post('/chatwork/send', [ChatworkController::class, 'send']);
+Route::get('/chatwork', [ChatworkController::class, 'index'])->name('chatwork.index');
+Route::post('/chatwork/send', [ChatworkController::class, 'send'])->name('chatwork.send');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ChatworkService;
-
+use Illuminate\Support\Facades\Log;
 class ChatworkController extends Controller
 {
     protected $chatworkService;
@@ -14,11 +14,16 @@ class ChatworkController extends Controller
         $this->chatworkService = $chatworkService;
     }
 
+    public function index(Request $request)
+    {
+        return view('chatwork.index');
+    }
+
     public function send(Request $request)
     {
-        $message = $request->input('message', 'Hello from Laravel!');
-        $response = $this->chatworkService->sendMessage($message);
-
-        return response()->json($response);
+        // $message = $request->input('message', 'Hello from Laravel!');
+        $response = $this->chatworkService->sendMessage('');
+        Log::info($response);
+        return view('chatwork.index');
     }
 }

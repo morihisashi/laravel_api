@@ -27,14 +27,12 @@ class ChatworkService
 
     public function sendMessage($message)
     {
-        $url = "{$this->baseUrl}/rooms/{$this->roomId}/messages";
-
         $response = Http::withHeaders([
-            'X-ChatWorkToken' => $this->apiToken,
-        ])->post($url, [
-            'body' => $message,
+            'X-ChatWorkToken' => $this->apiToken
+        ])->asForm()->post("https://api.chatwork.com/v2/rooms/{$this->roomId}/messages", [
+            'body' => 'Hello from Laravel'
         ]);
 
-        return $response->json();
+        return $response->json(); // レスポンスを返す
     }
 }
