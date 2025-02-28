@@ -14,7 +14,7 @@ class ChatworkController extends Controller
         $this->chatworkService = $chatworkService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
         return view('chatwork.index');
     }
