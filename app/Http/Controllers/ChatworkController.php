@@ -67,4 +67,34 @@ class ChatworkController extends Controller
             return view('chatwork.getuser', ['error' => 'メンバー情報を取得できませんでした。']);
         }
     }
+
+    public function showRoomInfoForm()
+    {
+        return view('chatwork.roominfo');
+    }
+
+    public function getRoomMessages(Request $request)
+    {
+        $request->validate([
+            'room_id' => 'required|numeric',
+        ]);
+
+        $roomId = $request->input('room_id');
+        $apiToken = env('CHATWORK_API_TOKEN'); // 環境変数からAPIトークン取得
+
+        // Chatwork APIを呼び出してメッセージを取得
+        $response = Http::withHeaders([
+            'X-ChatWorkToken' => $apiToken
+        ])->get("https://api.chatwork.com/v2/rooms/{$roomId}/messages");
+
+        // レスポンスをJSONで取得
+        $messages = $response->json();
+
+        // APIが成功したかチェック
+        if ($response->successful()) {
+            return view('chatwork.roominfo', ['messages' => $messages]);
+        } else {
+            return view('chatwork.roominfo', ['error' => 'メッセージを取得できませんでした。']);
+        }
+    }
 }

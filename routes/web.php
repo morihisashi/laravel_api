@@ -30,3 +30,5 @@ Route::get('/chatwork', [ChatworkController::class, 'index'])->name('chatwork.in
 Route::post('/chatwork/send', [ChatworkController::class, 'sendMessage'])->name('chatwork.send');
 Route::get('/chatwork/getuser', [ChatworkController::class, 'showGetUserForm'])->name('chatwork.getuser.form');
 Route::post('/chatwork/getuser', [ChatworkController::class, 'getRoomMembers'])->name('chatwork.getuser');
+Route::get('/chatwork/roominfo', [ChatworkController::class, 'showRoomInfoForm'])->name('chatwork.roominfo.form');
+Route::post('/chatwork/roominfo', [ChatworkController::class, 'getRoomMessages'])->name('chatwork.roominfo');
