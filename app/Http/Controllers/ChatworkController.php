@@ -3,27 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\ChatworkService;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+
 class ChatworkController extends Controller
 {
-    protected $chatworkService;
-
-    public function __construct(ChatworkService $chatworkService)
-    {
-        $this->chatworkService = $chatworkService;
-    }
-
     public function index()
     {
         return view('chatwork.index');
     }
 
-    public function send(Request $request)
+    public function sendMessage(Request $request)
     {
-        // $message = $request->input('message', 'Hello from Laravel!');
-        $response = $this->chatworkService->sendMessage('');
-        Log::info($response);
-        return view('chatwork.index');
+        $request->validate([
+            'room_id' => 'required',
+            'message' => 'required',
+        ]);
+
+        $roomId = $request->input('room_id');
+        $message = $request->input('message');
+        $apiToken = env('CHATWORK_API_TOKEN'); // .envからAPIトークンを取得
+
+        // Chatwork APIにメッセージを送信
+        $response = Http::withHeaders([
+            'X-ChatWorkToken' => $apiToken
+        ])->asForm()->post("https://api.chatwork.com/v2/rooms/{$roomId}/messages", [
+            'body' => $message
+        ]);
+
+        // レスポンスを取得して表示
+        if ($response->successful()) {
+            return back()->with('success', 'メッセージを送信しました！');
+        } else {
+            return back()->with('error', 'メッセージ送信に失敗しました。');
+        }
     }
 }
